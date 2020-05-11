@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>VolleyApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="contentCenter">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5">
+        <app-team-change team="red"></app-team-change>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button color="secondary" (click)="backButton()" [disabled]="this.scoreService.index === 0">
+          <ion-icon name="arrow-round-back"></ion-icon>
+        </ion-button>
+        <ion-button color="secondary" (click)="fordwardButton()" [disabled]="this.scoreService.index + 1 >= this.scoreService.historyScore.length">
+          <ion-icon name="arrow-round-forward"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="5">
+        <app-team-change team="blue"></app-team-change>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row id="rowMargin">
+      <ion-col>
+        <app-team-position team="red"></app-team-position>
+        <app-score score="{{scoreService.score.red}}" color="red"></app-score>
+      </ion-col>
+      <div class="verticalLine"></div>
+      <ion-col>
+        <app-team-position team="blue"></app-team-position>
+        <app-score score="{{scoreService.score.blue}}" color="blue"></app-score>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

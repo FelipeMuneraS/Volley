@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Jugadores del equipo #{{team.number}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #contentScroll>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item *ngFor="let item of players; let i = index">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="1">
+                <ion-label>{{numbers[i]}}</ion-label>
+              </ion-col>
+              <ion-col size="10">
+                <ion-label>{{item}}</ion-label>
+              </ion-col>
+              <ion-col size="1">
+                <ion-button icon-only (click)="removePlayer(i)">
+                  <ion-icon name="close"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="1">
+                <ion-input type="tel" placeholder="#" [(ngModel)]="number" maxlength="2">
+                </ion-input>
+              </ion-col>
+              <ion-col size="10">
+                <ion-input id="inputName" [(ngModel)]="player" placeholder="Nombre del jugador"></ion-input>
+              </ion-col>
+              <ion-col size="1">
+                <ion-button icon-only color="secondary" (click)="addPlayer()">
+                  <ion-icon name="add"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-content id="contentCenter">
+  <ion-input id="teamName" placeholder="Nombre del equipo" [(ngModel)]="team.name" (ngModelChange)="isDisabledP()"></ion-input>
+  <ion-button id="next" (click)="next()" [disabled]="isDisabled">Siguiente</ion-button>
+</ion-content>

@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>VolleyApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="contentCenter">
+  <ion-grid *ngIf="!isSelected">
+    <ion-row>
+      <ion-col class="centerStyle">
+        <h2>Elegir el equipo que saca</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="centerStyle">
+        <ion-button (click)="select('red')">{{teamsService.teamName['red']}}</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="centerStyle">
+        <ion-button  (click)="select('blue')">{{teamsService.teamName['blue']}}</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="random()">Aleatorio</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="isSelected">
+    <ion-row>
+      <ion-col>
+        <h2 id="teamStyle">Equipo que saca</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h2 id="selectedStyle">{{teamsService.getServicingName()}}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button id="nextStyle" (click)="next()" >Continuar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
