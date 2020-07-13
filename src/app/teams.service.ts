@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -49,7 +50,7 @@ export class TeamsService {
 
   rotate(team: string) {
     if (this.servicingTeamCalc(team)) {
-      this.historyPlayersTeam.push(Object.assign({}, this.playersTeam));
+      this.historyPlayersTeam.push(JSON.parse(JSON.stringify(this.playersTeam)));
       this.index++;
       const temp = this.playersTeam[team].one;
       this.playersTeam[team].one = this.playersTeam[team].two;
@@ -77,7 +78,7 @@ export class TeamsService {
     if (this.historyPlayersTeam.length > this.index + 1) {
       this.liberoOut();
       this.index++;
-      this.playersTeam = this.historyPlayersTeam[this.index];
+      Promise.resolve().then(() => this.playersTeam = this.historyPlayersTeam[this.index]);
     }
   }
 
@@ -85,7 +86,7 @@ export class TeamsService {
     if (this.index - 1 >= 0) {
       this.liberoOut();
       this.index--;
-      this.playersTeam = this.historyPlayersTeam[this.index];
+      Promise.resolve().then(() => this.playersTeam = this.historyPlayersTeam[this.index]);
     }
   }
 
@@ -98,8 +99,8 @@ export class TeamsService {
   }
 
   changeLibero(team: string, player: string) {
-    if (this.playersTeam[team].libero === this.playersTeam[team].liberoNumber ||
-      this.playersTeam[team][player] === this.playersTeam[team].liberoNumber) {
+    if ((this.playersTeam[team].libero === this.playersTeam[team].liberoNumber ||
+      this.playersTeam[team][player] === this.playersTeam[team].liberoNumber) && (this.playersTeam[team].libero !== null)) {
       const temp = this.playersTeam[team][player];
       this.playersTeam[team][player] = this.playersTeam[team].libero;
       this.playersTeam[team].libero = temp;

@@ -90,13 +90,15 @@ export class InsertRotationPage implements OnInit {
   }
 
   setIsEnabled() {
-    let bool = true;
+    let count = 0;
+    // tslint:disable-next-line: forin
     for (const position in this.teamPositions) {
-      if (this.teamPositions[position] === null || this.teamPositions[position] === undefined) {
-        bool = false;
+      if ((this.teamPositions[position] === null || this.teamPositions[position] === undefined)
+        && (position !== 'libero')) {
+        count++;
       }
     }
-    this.isEnabled = bool;
+    this.isEnabled = count < 1;
   }
 
   next() {
