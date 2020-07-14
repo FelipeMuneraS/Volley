@@ -64,17 +64,17 @@ export class ScoreService {
       this.lastScore = false;
     }
     if (this.index - 1 >= 0) {
-      Promise.resolve().then(() => this.teamsService.backwardRotation());
       this.index--;
+      this.teamsService.backwardRotation();
       this.score = this.historyScore[this.index];
     }
   }
 
   fordwardScore() {
-    Promise.resolve().then(() => this.teamsService.fordwardRotation());
     if (this.index + 1 <= this.historyScore.length) {
       this.index++;
       this.score = this.historyScore[this.index];
+      this.teamsService.fordwardRotation();
     }
   }
 

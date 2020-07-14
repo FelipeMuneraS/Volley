@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.voleyapp" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.voleyapp" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>VolleyApp</name>
     <description>VolleyApp es una aplicación desarrollada durante el curso de Proyecto Integrador en la Universidad de Antioquia</description>
     <author email="luisf.munera@udea.edu.co">Grupo Proyecto Integrador</author>

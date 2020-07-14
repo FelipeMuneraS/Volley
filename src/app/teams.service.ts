@@ -32,6 +32,7 @@ export class TeamsService {
     }
   };
   historyPlayersTeam = [];
+  historyServicingTeam = [];
   servicingTeam = null;
   index = 0;
   playersNames = {
@@ -49,9 +50,10 @@ export class TeamsService {
   }
 
   rotate(team: string) {
+    this.historyPlayersTeam.push(JSON.parse(JSON.stringify(this.playersTeam)));
+    this.historyServicingTeam.push(JSON.parse(JSON.stringify(this.servicingTeam)));
+    this.index++;
     if (this.servicingTeamCalc(team)) {
-      this.historyPlayersTeam.push(JSON.parse(JSON.stringify(this.playersTeam)));
-      this.index++;
       const temp = this.playersTeam[team].one;
       this.playersTeam[team].one = this.playersTeam[team].two;
       this.playersTeam[team].two = this.playersTeam[team].three;
@@ -75,18 +77,20 @@ export class TeamsService {
   }
 
   backwardRotation() {
-    if (this.historyPlayersTeam.length > this.index + 1) {
+    if (this.index > 1) {
       this.liberoOut();
-      this.index++;
-      Promise.resolve().then(() => this.playersTeam = this.historyPlayersTeam[this.index]);
+      this.index--;
+      this.playersTeam = this.historyPlayersTeam[this.index - 1];
+      this.servicingTeam = this.historyServicingTeam[this.index - 1];
     }
   }
 
   fordwardRotation() {
-    if (this.index - 1 >= 0) {
+    if (this.index < this.historyPlayersTeam.length) {
       this.liberoOut();
-      this.index--;
-      Promise.resolve().then(() => this.playersTeam = this.historyPlayersTeam[this.index]);
+      this.index++;
+      this.playersTeam = this.historyPlayersTeam[this.index - 1];
+      this.servicingTeam = this.historyServicingTeam[this.index - 1];
     }
   }
 
